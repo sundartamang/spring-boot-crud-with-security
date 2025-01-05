@@ -1,4 +1,4 @@
-package payloads;
+package com.blog.payloads;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

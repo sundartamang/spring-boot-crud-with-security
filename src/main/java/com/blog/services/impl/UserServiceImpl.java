@@ -1,12 +1,12 @@
-package services.impl;
+package com.blog.services.impl;
 
-import entities.Users;
-import exceptions.ResourceNotFoundException;
+import com.blog.entities.Users;
+import com.blog.exceptions.ResourceNotFoundException;
+import com.blog.payloads.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import payloads.UserDto;
-import repositories.UserRepo;
-import services.UserService;
+import com.blog.repositories.UserRepo;
+import com.blog.services.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Integer userId) {
         Users user = this.userRepo.findById(userId).orElseThrow(
                 ()-> new ResourceNotFoundException("User ",  " Id", userId));
+        System.out.println("User to be deleted "+ user);
         this.userRepo.delete(user);
     }
 

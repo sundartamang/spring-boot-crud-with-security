@@ -1,6 +1,6 @@
-package services;
+package com.blog.services;
 
-import payloads.UserDto;
+import com.blog.payloads.UserDto;
 
 import java.util.List;
 
