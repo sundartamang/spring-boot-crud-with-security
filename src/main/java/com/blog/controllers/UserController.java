@@ -9,7 +9,6 @@ import com.blog.payloads.UserDto;
 import com.blog.services.UserService;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -38,7 +37,8 @@ public class UserController {
 
     @GetMapping("/")
     public ResponseEntity<List<UserDto>> getAllUsers(){
-        return  ResponseEntity.ok(this.userService.getAllUsers());
+        List<UserDto> userData = this.userService.getAllUsers();
+        return  ResponseEntity.ok(userData);
     }
 
     @GetMapping("/{userId}")
