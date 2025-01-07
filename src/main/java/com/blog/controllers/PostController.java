@@ -2,6 +2,7 @@ package com.blog.controllers;
 
 import com.blog.payloads.ApiResponse;
 import com.blog.payloads.PostDto;
+import com.blog.payloads.PostResponse;
 import com.blog.services.PostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,12 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<PostDto>> getAllPost(){
-        List<PostDto> postDtos = this.postService.getAllPost();
-        return new ResponseEntity<List<PostDto>>(postDtos, HttpStatus.OK);
+    public ResponseEntity<PostResponse> getAllPost(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize
+    ){
+        PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize);
+        return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
     }
 
     @GetMapping("/posts/{postId}")
