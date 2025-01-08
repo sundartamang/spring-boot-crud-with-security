@@ -7,7 +7,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -28,7 +30,7 @@ public class Users {
     private String password;
     private String about;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
 }

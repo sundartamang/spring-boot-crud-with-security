@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -26,6 +26,11 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
     @ManyToOne
     private Users users;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
 }
