@@ -7,12 +7,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -20,9 +18,9 @@ import java.util.Set;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(name="user_name", nullable = false)
+    @Column(name = "user_name", nullable = false)
     private String name;
     @Column(nullable = false)
     private String email;

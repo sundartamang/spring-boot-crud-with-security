@@ -28,8 +28,7 @@ public class PostController {
 
     @PostMapping("/user/{userId}/category/{categoryId}/posts")
     public ResponseEntity<PostDto> createPost(
-            @Valid
-            @ModelAttribute PostDto postDto,
+            @Valid @ModelAttribute PostDto postDto,
             @PathVariable Integer userId,
             @PathVariable Integer categoryId,
             @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
@@ -56,24 +55,22 @@ public class PostController {
             @RequestParam(value = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
-            @RequestParam(value = "sortDir", defaultValue = AppConstants.SOR_DIR, required = false) String sortDir
-    ){
+            @RequestParam(value = "sortDir", defaultValue = AppConstants.SOR_DIR, required = false) String sortDir) {
         PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize, sortBy, sortDir);
         return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
     }
 
     @GetMapping("/posts/{postId}")
-    public ResponseEntity<PostDto> getAllPost(@PathVariable Integer postId){
+    public ResponseEntity<PostDto> getAllPost(@PathVariable Integer postId) {
         PostDto postDto = this.postService.getPostById(postId);
         return new ResponseEntity<PostDto>(postDto, HttpStatus.OK);
     }
 
     @PutMapping("/posts/{postId}")
     public ResponseEntity<PostDto> updatePost(
-            @Valid
-            @ModelAttribute PostDto postDto,
+            @Valid @ModelAttribute PostDto postDto,
             @PathVariable Integer postId,
-            @RequestPart(value = "image", required = false) MultipartFile image) throws IOException{
+            @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
 
         PostDto existingPost = this.postService.getPostById(postId);
         // Delete the old image if it exists
@@ -103,8 +100,8 @@ public class PostController {
 
     @GetMapping("/posts/search/{keywords}")
     public ResponseEntity<List<PostDto>> searchByTitle(
-            @PathVariable("keywords") String keywords){
+            @PathVariable("keywords") String keywords) {
         List<PostDto> filterPosts = this.postService.searchPosts(keywords);
-        return  new ResponseEntity<List<PostDto>>(filterPosts, HttpStatus.OK);
+        return new ResponseEntity<List<PostDto>>(filterPosts, HttpStatus.OK);
     }
 }
