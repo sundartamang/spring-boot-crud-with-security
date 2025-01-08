@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignore images in the specified path
+src/main/resources/static/post/*.*
