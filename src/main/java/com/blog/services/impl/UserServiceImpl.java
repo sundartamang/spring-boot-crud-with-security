@@ -3,7 +3,6 @@ package com.blog.services.impl;
 import com.blog.entities.Users;
 import com.blog.exceptions.ResourceNotFoundException;
 import com.blog.payloads.UserDto;
-import org.apache.catalina.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateUser(UserDto userDto, Integer userId) {
         Users user = this.userRepo.findById(userId).orElseThrow(
-                ()-> new ResourceNotFoundException("User", " id", userId));
+                () -> new ResourceNotFoundException("User", " id", userId));
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
@@ -43,33 +42,33 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserById(Integer userId) {
         Users user = this.userRepo.findById(userId).orElseThrow(
-                ()-> new ResourceNotFoundException("User ", " id", userId));
+                () -> new ResourceNotFoundException("User ", " id", userId));
         return this.userToDto(user);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
         List<Users> users = this.userRepo.findAll();
-       List<UserDto> userDtos = users.stream().map(
-               user -> this.userToDto(user)).collect(Collectors.toList());
-       return  userDtos;
+        List<UserDto> userDtos = users.stream().map(
+                user -> this.userToDto(user)).collect(Collectors.toList());
+        return userDtos;
     }
 
     @Override
     public void deleteUser(Integer userId) {
         Users user = this.userRepo.findById(userId).orElseThrow(
-                ()-> new ResourceNotFoundException("User ",  " Id", userId));
-        System.out.println("User to be deleted "+ user);
+                () -> new ResourceNotFoundException("User ", " Id", userId));
+        System.out.println("User to be deleted " + user);
         this.userRepo.delete(user);
     }
 
-    private Users dtoToUser(UserDto userDto){
+    private Users dtoToUser(UserDto userDto) {
         Users user = this.modelMapper.map(userDto, Users.class);
         return user;
     }
 
-    private UserDto userToDto(Users user){
+    private UserDto userToDto(Users user) {
         UserDto userDto = this.modelMapper.map(user, UserDto.class);
-        return  userDto;
+        return userDto;
     }
 }

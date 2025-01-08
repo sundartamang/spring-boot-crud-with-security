@@ -31,31 +31,31 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto updateCategory(CategoryDto categoryDto, Integer categoryId) {
         Category category = this.categoryRepo.findById(categoryId).orElseThrow(
-                ()-> new ResourceNotFoundException("Category ", "category id", categoryId));
+                () -> new ResourceNotFoundException("Category ", "category id", categoryId));
         category.setTitle(categoryDto.getTitle());
         category.setDescription(categoryDto.getDescription());
-        Category updatedCategory =  this.categoryRepo.save(category);
+        Category updatedCategory = this.categoryRepo.save(category);
         return this.modelMapper.map(updatedCategory, CategoryDto.class);
     }
 
     @Override
     public void deleteCategory(Integer categoryId) {
         Category category = this.categoryRepo.findById(categoryId).orElseThrow(
-                ()-> new ResourceNotFoundException("Category", " category id", categoryId));
+                () -> new ResourceNotFoundException("Category", " category id", categoryId));
         categoryRepo.delete(category);
     }
 
     @Override
     public CategoryDto getCategory(Integer categoryId) {
         Category category = this.categoryRepo.findById(categoryId).orElseThrow(
-                ()-> new ResourceNotFoundException("Category", " category id", categoryId));
+                () -> new ResourceNotFoundException("Category", " category id", categoryId));
         return this.modelMapper.map(category, CategoryDto.class);
     }
 
     @Override
     public List<CategoryDto> getAllCategory() {
         List<Category> category = this.categoryRepo.findAll();
-        List<CategoryDto> categoryDtoList =  category.stream().map(
+        List<CategoryDto> categoryDtoList = category.stream().map(
                 (cat) -> this.modelMapper.map(cat, CategoryDto.class)).collect(Collectors.toList());
         return categoryDtoList;
     }

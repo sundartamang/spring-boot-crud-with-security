@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
@@ -22,11 +21,11 @@ public class FileSystemImpl implements FileService {
         // random file name generator
         String randomID = UUID.randomUUID().toString();
         String fileName1 = randomID.concat(name.substring(name.lastIndexOf(".")));
-        String filePath = path + File.separator +fileName1;
+        String filePath = path + File.separator + fileName1;
 
         // create folder if needed
         File f = new File(path);
-        if(!f.exists()){
+        if (!f.exists()) {
             f.mkdir();
         }
 
@@ -44,7 +43,6 @@ public class FileSystemImpl implements FileService {
 
     @Override
     public boolean deleteFile(String path, String fileName) throws IOException {
-        // Normalize the path
         path = path.endsWith(File.separator) ? path : path + File.separator;
 
         File file = new File(path + fileName);
