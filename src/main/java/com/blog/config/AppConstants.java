@@ -7,4 +7,7 @@ public class AppConstants {
     public static final String SOR_DIR = "asc";
 
     public static final String IMAGE_PATH = "src/main/resources/static/post/";
+
+    public static final Integer NORMAL_USER = 502;
+    public static final Integer ADMIN_ROLE = 501;
 }

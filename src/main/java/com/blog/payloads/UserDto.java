@@ -1,9 +1,15 @@
 package com.blog.payloads;
 
+import com.blog.entities.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -21,4 +27,17 @@ public class UserDto {
     private String password;
     @NotBlank(message = "About us can not be blank")
     private String about;
+
+    private Set<RoleDto> role = new HashSet<>();
+
+    @JsonIgnore
+    public String getPassword() {
+        return this.password;
+    }
+
+    @JsonProperty
+    public void setPassword(String password) {
+        this.password=password;
+    }
+
 }
